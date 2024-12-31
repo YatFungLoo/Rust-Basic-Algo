@@ -1,6 +1,8 @@
 # Rust-Basic-Algo
 Simple algorithms implemented with Rust, as self-learning.
 
+*Goal: a sorting a day until i finish chapter 2 of the book on sorting.*
+
 All implemented are referencing from Algorithms 4th Edition by Robert Sedgewick, Kevin Wayne.
 
 ## Selection Sort
