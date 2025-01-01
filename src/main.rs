@@ -53,7 +53,9 @@ pub fn shell_sort(array: &mut [i8]) {
     }
 }
 
-fn main() {}
+fn main() {
+    println!("Hello.");
+}
 
 #[cfg(test)]
 mod tests {
