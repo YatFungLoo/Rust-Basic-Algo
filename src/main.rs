@@ -43,9 +43,9 @@ pub fn shell_sort(array: &mut [i8]) {
 
     while h_gap >= 1 {
         for i in h_gap..=length {
-            for j in (1..i).step_by(h_gap).rev() {
-                if array[j] < array[j - 1] {
-                    array.swap(j, j - 1);
+            for j in (h_gap..i).step_by(h_gap).rev() {
+                if array[j] < array[j - h_gap] {
+                    array.swap(j, j - h_gap);
                 }
             }
         }
@@ -77,8 +77,15 @@ mod tests {
 
     #[test]
     fn shell_sort_test() {
-        let mut int_array: [i8; 10] = [1, 6, 7, 3, 2, 4, 9, 8, 0, 5];
-        let answer: [i8; 10] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        let mut int_array: [i8; 40] = [
+            1, 6, 7, 3, 2, 4, 9, 8, 0, 5, 1, 6, 7, 3, 2, 4, 9, 8, 0, 5, 1, 6, 7, 3, 2, 4, 9, 8, 0,
+            5, 1, 6, 7, 3, 2, 4, 9, 8, 0, 5,
+        ];
+        // let answer: [i8; 10] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        let answer: [i8; 40] = [
+            0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7,
+            7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9,
+        ];
         shell_sort(&mut int_array);
         assert_eq!(int_array, answer);
     }
