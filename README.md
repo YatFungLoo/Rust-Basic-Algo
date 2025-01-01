@@ -10,3 +10,6 @@ Find smallest item in the array and exchange it to the first entry. Repeat to th
 
 ## Insertion Sort
 Compare each entry starting from index 1, one to the left of itself, if the entry is greater than itself, swap entry. Otherwise move to the next entry. Repeat until the whole arrat is sorted.
+
+## Shell Sort (TODO)
+A simple extention to insertion sort, that allow exchange of array entries.
