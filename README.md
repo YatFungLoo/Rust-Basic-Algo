@@ -5,7 +5,7 @@ Simple algorithms implemented with Rust, as self-learning.
 
 All implemented are referencing from Algorithms 4th Edition by Robert Sedgewick, Kevin Wayne.
 
-![Github Action](https://github.com/YatFungLoo/Rust-Basic-Algo/actions/workflows/rust.yml/badge.svg) ![Github Action Event Push](https://github.com/YatFungLoo/Rust-Basic-Algo/actions/workflows/rust.yml/badge.svg?event=push)
+[![Build](https://github.com/YatFungLoo/Rust-Basic-Algo/actions/workflows/rust.yml/badge.svg)](https://github.com/YatFungLoo/Rust-Basic-Algo/actions/workflows/rust.yml)
 
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
