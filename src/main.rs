@@ -53,9 +53,33 @@ pub fn shell_sort(array: &mut [i8]) {
     }
 }
 
-fn main() {
-    println!("Hello.");
+// lo is the start index of the first half, mid index is where the each sorted seciton divides, hi is the end index of the second half.
+pub fn abs_inplace_merge_sort(array: &mut [i8], lo: usize, mid: usize, hi: usize) {
+    let mut aux: Vec<i8> = Vec::new();
+    for index in lo..hi {
+        aux.push(array[index]);
+    }
+
+    let mut i = lo;
+    let mut j = mid + 1;
+    for k in lo..hi {
+        if i > mid { // left array is exhausted.
+            array[k] = aux[j];
+            j = j + 1;
+        } else if j > hi { // right array is exhausted.
+            array[k] = aux[i];
+            i = i + 1;
+        } else if aux[j] < aux[i] {
+            array[k] = aux[j];
+            j = j + 1;
+        } else {
+            array[k] = aux[i];
+            i = i + 1;
+        }
+    }
 }
+
+fn main() {}
 
 #[cfg(test)]
 mod tests {
@@ -89,6 +113,17 @@ mod tests {
             7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9,
         ];
         shell_sort(&mut int_array);
+        assert_eq!(int_array, answer);
+    }
+
+    #[test]
+    fn abs_inplace_merge_sort_test() {
+        let mut int_array: [i8; 10] = [1, 2, 3, 6, 7, 0, 4, 5, 8, 9];
+        let answer: [i8; 10] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        let lo: usize = 0;
+        let hi: usize = int_array.len();
+        let mid: usize = 4; // One index before the start of the second sorted half.
+        abs_inplace_merge_sort(&mut int_array, lo, mid, hi);
         assert_eq!(int_array, answer);
     }
 }
