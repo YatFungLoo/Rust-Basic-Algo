@@ -27,7 +27,7 @@ Doesn't require extra space, only ever swaping inplace. Good for paritally sorte
 ## Selection Sort
 Find smallest item in the array and exchange it to the first entry. Repeat to the next smallest item and exchange with the second entry (since it will be the second smallest). Repeat until the whole array is sorted.
 
-Pros: Simple to create, doesn't use extra space. Cons: For completely sorted array, slow. 
+Pros: Simple to create, doesn't use extra space. Cons: For completely sorted array, slow.
 
 ## Insertion Sort
 Compare each entry starting from index 1, one to the left of itself, if the entry is greater than itself, swap entry. Otherwise move to the next entry. Repeat until the whole array is sorted.
@@ -38,12 +38,12 @@ A simple extent ion to insertion sort, instead of comparing one to the left of i
 ` h_gap ` is chosen by the programmer, this implementation uses ` while h_gap < array.len()/3) h_gap = 3*h_gap + 1; ` which was provided by the book at section 2.3.
 
 # Merge Sorts
-Idea is to dividing the array into slices, sort each slices recursively and merge the results. 
+Idea is to dividing the array into slices, sort each slices recursively and merge the results.
 
 Pros: guarantees to sort array of N items in time proportional to (N log N). Cons: uses extra space proportional to N.
 
 ## Abstract In-Place Merge Sort
-A mere coding test. Divide the array into two parts, while keeping track of both arrays, compare entries and copy the lesser value back to itself, using a auxiliary array to keep value. 
+Divide the array into two sorted parts, compare entries of each half and copy the lesser value back to itself, using a auxiliary array to keep original value.
 
 # How to run the code
 
