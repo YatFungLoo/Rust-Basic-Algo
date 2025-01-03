@@ -1,11 +1,17 @@
+use std::cmp::Ordering;
+
 pub fn print_array(array: &[i8]) {
     // for element in array {
-    let length = array.len();
+    let length = array.len() - 1;
     for (index, element) in array.iter().enumerate() {
-        if index < length - 1 {
-            print!("{element}, ");
-        } else if index == length - 1 {
-            println!("{element}");
+        match index.cmp(&length) {
+            Ordering::Less => {
+                print!("{element}, ")
+            }
+            Ordering::Equal => {
+                println!("{element}");
+            }
+            Ordering::Greater => {}
         }
     }
 }
@@ -49,7 +55,7 @@ pub fn shell_sort(array: &mut [i8]) {
                 }
             }
         }
-        h_gap = h_gap / 3;
+        h_gap /= 3;
     }
 }
 
