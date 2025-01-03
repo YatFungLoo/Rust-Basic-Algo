@@ -1,4 +1,5 @@
 use std::cmp::Ordering;
+use std::env;
 
 pub fn print_array(array: &[i8]) {
     // for element in array {
@@ -62,17 +63,19 @@ pub fn shell_sort(array: &mut [i8]) {
 // lo is the start index of the first half, mid index is where the each sorted seciton divides, hi is the end index of the second half.
 pub fn abs_inplace_merge_sort(array: &mut [i8], lo: usize, mid: usize, hi: usize) {
     let mut aux: Vec<i8> = Vec::new();
-    for index in lo..hi {
+    for index in lo..=hi {
         aux.push(array[index]);
     }
 
     let mut i = lo;
     let mut j = mid + 1;
-    for k in lo..hi {
-        if i > mid { // left array is exhausted.
+    for k in lo..=hi {
+        if i > mid {
+            // left array is exhausted.
             array[k] = aux[j];
             j = j + 1;
-        } else if j > hi { // right array is exhausted.
+        } else if j > hi {
+            // right array is exhausted.
             array[k] = aux[i];
             i = i + 1;
         } else if aux[j] < aux[i] {
@@ -85,7 +88,29 @@ pub fn abs_inplace_merge_sort(array: &mut [i8], lo: usize, mid: usize, hi: usize
     }
 }
 
-fn main() {}
+// uses abs_inplace_merge_sort().
+pub fn topdown_merge_sort(array: &mut [i8], lo: usize, hi: usize) {
+    if hi <= lo {
+        return;
+    }
+
+    let mid: usize = lo + (hi - lo) / 2;
+
+    topdown_merge_sort(array, lo, mid);
+    topdown_merge_sort(array, mid + 1, hi);
+
+    abs_inplace_merge_sort(array, lo, mid, hi);
+}
+
+fn main() {
+    env::set_var("RUST_BACKTRACE", "1");
+
+    let mut int_array: [i8; 10] = [1, 6, 7, 3, 2, 4, 9, 8, 0, 5];
+    let lo: usize = 0;
+    let hi: usize = int_array.len() - 1;
+    topdown_merge_sort(&mut int_array, lo, hi);
+    print_array(&int_array);
+}
 
 #[cfg(test)]
 mod tests {
@@ -127,9 +152,19 @@ mod tests {
         let mut int_array: [i8; 10] = [1, 2, 3, 6, 7, 0, 4, 5, 8, 9];
         let answer: [i8; 10] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
         let lo: usize = 0;
-        let hi: usize = int_array.len();
+        let hi: usize = int_array.len() - 1;
         let mid: usize = 4; // One index before the start of the second sorted half.
         abs_inplace_merge_sort(&mut int_array, lo, mid, hi);
+        assert_eq!(int_array, answer);
+    }
+
+    #[test]
+    fn topdown_merge_sort_test() {
+        let mut int_array: [i8; 10] = [1, 2, 3, 6, 7, 0, 4, 5, 8, 9];
+        let answer: [i8; 10] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        let lo: usize = 0;
+        let hi: usize = int_array.len() - 1;
+        topdown_merge_sort(&mut int_array, lo, hi);
         assert_eq!(int_array, answer);
     }
 }
