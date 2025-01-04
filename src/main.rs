@@ -1,3 +1,4 @@
+use std::cmp;
 use std::cmp::Ordering;
 use std::env;
 
@@ -88,28 +89,69 @@ pub fn abs_inplace_merge_sort(array: &mut [i8], lo: usize, mid: usize, hi: usize
     }
 }
 
+// Reuse vector everytime due to vector no having the correct index for right side sorts.
+pub fn merge_sort(array: &mut [i8], aux: &mut [i8], lo: usize, mid: usize, hi: usize) {
+    for index in lo..=hi {
+        aux[index] = array[index];
+    }
+
+    let mut i = lo;
+    let mut j = mid + 1;
+    for k in lo..=hi {
+        if i > mid {
+            // left array is exhausted.
+            array[k] = aux[j];
+            j += 1;
+        } else if j > hi {
+            // right array is exhausted.
+            array[k] = aux[i];
+            i += 1;
+        } else if aux[j] < aux[i] {
+            array[k] = aux[j];
+            j += 1;
+        } else {
+            array[k] = aux[i];
+            i += 1;
+        }
+    }
+}
+
 // uses abs_inplace_merge_sort().
-pub fn topdown_merge_sort(array: &mut [i8], lo: usize, hi: usize) {
+pub fn topdown_merge_sort(array: &mut [i8], aux: &mut [i8], lo: usize, hi: usize) {
     if hi <= lo {
         return;
     }
 
     let mid: usize = lo + (hi - lo) / 2;
 
-    topdown_merge_sort(array, lo, mid);
-    topdown_merge_sort(array, mid + 1, hi);
+    topdown_merge_sort(array, aux, lo, mid);
+    topdown_merge_sort(array, aux, mid + 1, hi);
 
-    abs_inplace_merge_sort(array, lo, mid, hi);
+    merge_sort(array, aux, lo, mid, hi);
+}
+
+// uses abs_inplace_merge_sort().
+pub fn bottomup_merge_sort(array: &mut [i8], aux_array: &mut [i8]) {
+    let length = array.len();
+    let mut sz: usize = 1;
+    let mut lo: usize = 0;
+
+    while sz < length {
+        while lo < (length - sz) {
+            merge_sort(
+                array,
+                aux_array,
+                lo,
+                lo + sz - 1,
+                cmp::min(lo + sz + sz - 1, length - 1),
+            );
+            lo += sz + sz;
+        }
+        sz += sz;
+    }
 }
 
 fn main() {
-    env::set_var("RUST_BACKTRACE", "1");
-
-    let mut int_array: [i8; 10] = [1, 6, 7, 3, 2, 4, 9, 8, 0, 5];
-    let lo: usize = 0;
-    let hi: usize = int_array.len() - 1;
-    topdown_merge_sort(&mut int_array, lo, hi);
-    print_array(&int_array);
 }
 
 #[cfg(test)]
@@ -138,7 +180,6 @@ mod tests {
             1, 6, 7, 3, 2, 4, 9, 8, 0, 5, 1, 6, 7, 3, 2, 4, 9, 8, 0, 5, 1, 6, 7, 3, 2, 4, 9, 8, 0,
             5, 1, 6, 7, 3, 2, 4, 9, 8, 0, 5,
         ];
-        // let answer: [i8; 10] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
         let answer: [i8; 40] = [
             0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7,
             7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9,
@@ -160,11 +201,12 @@ mod tests {
 
     #[test]
     fn topdown_merge_sort_test() {
-        let mut int_array: [i8; 10] = [1, 2, 3, 6, 7, 0, 4, 5, 8, 9];
-        let answer: [i8; 10] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        let mut int_array: [i8; 15] = [6, 1, 3, 7, 2, 4, 9, 8, 0, 5, 3, 5, 0, 9, 8];
+        let mut aux_array: [i8; 15] = [6, 1, 3, 7, 2, 4, 9, 8, 0, 5, 3, 5, 0, 9, 8];
+        let answer: [i8; 15] = [0, 0, 1, 2, 3, 3, 4, 5, 5, 6, 7, 8, 8, 9, 9];
         let lo: usize = 0;
         let hi: usize = int_array.len() - 1;
-        topdown_merge_sort(&mut int_array, lo, hi);
+        topdown_merge_sort(&mut int_array, &mut aux_array, lo, hi);
         assert_eq!(int_array, answer);
     }
 }
