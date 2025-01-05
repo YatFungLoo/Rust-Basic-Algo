@@ -147,11 +147,13 @@ pub fn bottomup_merge_sort(array: &mut [i8], aux_array: &mut [i8]) {
             );
             lo += sz + sz;
         }
+        lo = 0; // Reset index.
         sz += sz;
     }
 }
 
 fn main() {
+    env::set_var("RUST_BACKTRACE", "1");
 }
 
 #[cfg(test)]
@@ -202,11 +204,20 @@ mod tests {
     #[test]
     fn topdown_merge_sort_test() {
         let mut int_array: [i8; 15] = [6, 1, 3, 7, 2, 4, 9, 8, 0, 5, 3, 5, 0, 9, 8];
-        let mut aux_array: [i8; 15] = [6, 1, 3, 7, 2, 4, 9, 8, 0, 5, 3, 5, 0, 9, 8];
+        let mut aux_array: [i8; 15] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         let answer: [i8; 15] = [0, 0, 1, 2, 3, 3, 4, 5, 5, 6, 7, 8, 8, 9, 9];
         let lo: usize = 0;
         let hi: usize = int_array.len() - 1;
         topdown_merge_sort(&mut int_array, &mut aux_array, lo, hi);
+        assert_eq!(int_array, answer);
+    }
+
+    #[test]
+    fn bottomup_merge_sort_test() {
+        let mut int_array: [i8; 15] = [6, 1, 3, 7, 2, 4, 9, 8, 0, 5, 3, 5, 0, 9, 8];
+        let mut aux_array: [i8; 15] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        let answer: [i8; 15] = [0, 0, 1, 2, 3, 3, 4, 5, 5, 6, 7, 8, 8, 9, 9];
+        bottomup_merge_sort(&mut int_array, &mut aux_array);
         assert_eq!(int_array, answer);
     }
 }
