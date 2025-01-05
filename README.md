@@ -10,19 +10,20 @@ All implemented are referencing from Algorithms 4th Edition by Robert Sedgewick,
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
 
-- [Rust-Basic-Algo](#rust-basic-algo)
 - [Elementary Sorts](#elementary-sorts)
   - [Selection Sort](#selection-sort)
   - [Insertion Sort](#insertion-sort)
   - [Shell Sort](#shell-sort)
 - [Merge Sorts](#merge-sorts)
   - [Abstract In-Place Merge Sort](#abstract-in-place-merge-sort)
+  - [Top-Down Merge Sort](#top-down-merge-sort)
+  - [Bottom-Up Merge Sort](#bottom-up-merge-sort)
 - [How to run the code](#how-to-run-the-code)
 
 <!-- markdown-toc end -->
 
 # Elementary Sorts
-Doesn't require extra space, only ever swaping inplace. Good for paritally sorted array, the more paritally sorted an array is the better.
+Doesn't require extra space, only ever swapping in-place. Good for partially sorted array, the more partially sorted an array is the better.
 
 ## Selection Sort
 Find smallest item in the array and exchange it to the first entry. Repeat to the next smallest item and exchange with the second entry (since it will be the second smallest). Repeat until the whole array is sorted.
@@ -44,6 +45,16 @@ Pros: guarantees to sort array of N items in time proportional to (N log N). Con
 
 ## Abstract In-Place Merge Sort
 Divide the array into two sorted parts, compare entries of each half and copy the lesser value back to itself, using a auxiliary array to keep original value.
+
+Pros: Good to know for understanding merge sort's extension. Cons: Essentially pointless on its own. 
+
+## Top-Down Merge Sort
+An extension to abstract in-place merge sort, that sort fully un-sorted array. A famously known example of "divide and conquer", recursively performing an abstract in-place merge sort while dividing the array to halves.
+
+To further extend this method, we can 1) use insertion sort for small sub-arrays, 2) skip sub-arrays that are already in order, and 3) Recursive trickery to eliminate the copy to the auxiliary (TODO: add more info when I truly understand).
+
+## Bottom-Up Merge Sort
+Also a recursive algorithm similar to top-down approach. Rather than dividing the array over and over then merge sorting the sub-arrays, bottom-up approach merge sort sub-sections (usually smallest portion possible) of the array with multiple pass increasing the sub-section size (usually double the previous size, for in-place merge sort) until the whole array is sorted.
 
 # How to run the code
 
