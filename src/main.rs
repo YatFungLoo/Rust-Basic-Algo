@@ -152,6 +152,35 @@ pub fn bottomup_merge_sort(array: &mut [i8], aux_array: &mut [i8]) {
     }
 }
 
+// pub fn quick_sort(array: &mut [i8], lo: usize, hi: usize) {}
+
+pub fn quick_sort_partition(array: &mut [i8], lo: usize, hi: usize) -> usize {
+    let mut i = lo + 1;
+    let mut j = hi;
+    let c = array[lo]; // int to be 'c'ompared.
+
+    loop {
+        while array[i] < c {
+            if i == hi {
+                break;
+            }
+            i += 1;
+        }
+        while c < array[j] {
+            if j == lo {
+                break;
+            }
+            j -= 1;
+        }
+        if i >= j {
+            break;
+        }
+        array.swap(i, j);
+    }
+    array.swap(lo, j);
+    j
+}
+
 fn main() {
     env::set_var("RUST_BACKTRACE", "1");
 }
