@@ -10,6 +10,7 @@ All implemented are referencing from Algorithms 4th Edition by Robert Sedgewick,
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
 
+- [Rust-Basic-Algo](#rust-basic-algo)
 - [Elementary Sorts](#elementary-sorts)
   - [Selection Sort](#selection-sort)
   - [Insertion Sort](#insertion-sort)
@@ -18,6 +19,8 @@ All implemented are referencing from Algorithms 4th Edition by Robert Sedgewick,
   - [Abstract In-Place Merge Sort](#abstract-in-place-merge-sort)
   - [Top-Down Merge Sort](#top-down-merge-sort)
   - [Bottom-Up Merge Sort](#bottom-up-merge-sort)
+- [Quicksort](#quicksort)
+  - [Basic](#basic)
 - [How to run the code](#how-to-run-the-code)
 
 <!-- markdown-toc end -->
@@ -55,6 +58,17 @@ To further extend this method, we can 1) use insertion sort for small sub-arrays
 
 ## Bottom-Up Merge Sort
 Also a recursive algorithm similar to top-down approach. Rather than dividing the array over and over then merge sorting the sub-arrays, bottom-up approach merge sort sub-sections (usually smallest portion possible) of the array with multiple pass increasing the sub-section size (usually double the previous size, for in-place merge sort) until the whole array is sorted.
+
+Method of choice when sorting *linked-list* data structure, where one can sort the list *in-place* by creating pointer to node instead of having a seperate auxiliary array.
+
+> All sorting above are compare-based sorting algorithm.
+
+# Quicksort
+
+## Basic
+A divide and conquer method. First partitioning an array to two subarrays, then sort each indepentently. In comparsion to merge sort, which require an additional sort of the final two sorted subarrays, quicksort rearrange the array such that when the two subarrays are sorted, the whole array are ordered.
+
+> Partitioning is the key to quicksort.
 
 # How to run the code
 
