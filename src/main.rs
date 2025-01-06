@@ -152,7 +152,18 @@ pub fn bottomup_merge_sort(array: &mut [i8], aux_array: &mut [i8]) {
     }
 }
 
-// pub fn quick_sort(array: &mut [i8], lo: usize, hi: usize) {}
+pub fn quick_sort(array: &mut [i8], lo: usize, hi: usize) {
+    if hi <= lo {
+        return;
+    }
+    let j = quick_sort_partition(array, lo, hi);
+    if j == 0 {
+        quick_sort(array, lo, j );
+    } else {
+        quick_sort(array, lo, j - 1);
+    }
+    quick_sort(array, j + 1, hi);
+}
 
 pub fn quick_sort_partition(array: &mut [i8], lo: usize, hi: usize) -> usize {
     let mut i = lo + 1;
@@ -247,6 +258,15 @@ mod tests {
         let mut aux_array: [i8; 15] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         let answer: [i8; 15] = [0, 0, 1, 2, 3, 3, 4, 5, 5, 6, 7, 8, 8, 9, 9];
         bottomup_merge_sort(&mut int_array, &mut aux_array);
+        assert_eq!(int_array, answer);
+    }
+
+    #[test]
+    fn quick_sort_test() {
+        let mut int_array: [i8; 15] = [6, 1, 3, 7, 2, 4, 9, 8, 0, 5, 3, 5, 0, 9, 8];
+        let answer: [i8; 15] = [0, 0, 1, 2, 3, 3, 4, 5, 5, 6, 7, 8, 8, 9, 9];
+        let length = int_array.len() - 1;
+        quick_sort(&mut int_array, 0, length);
         assert_eq!(int_array, answer);
     }
 }
