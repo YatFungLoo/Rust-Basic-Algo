@@ -217,7 +217,11 @@ pub fn quick_sort_3way(array: &mut [i8], lo: usize, hi: usize) {
             }
         }
     }
-    quick_sort(array, lo, lt - 1);
+    if lt == 0 {
+        quick_sort(array, lo, lt);
+    } else {
+        quick_sort(array, lo, lt - 1);
+    }
     quick_sort(array, gt + 1, hi);
 }
 
@@ -297,5 +301,14 @@ mod tests {
         let length = int_array.len() - 1;
         quick_sort(&mut int_array, 0, length);
         assert_eq!(int_array, answer);
+    }
+
+    #[test]
+    fn quick_sort_3way_test() {
+        let mut int_array: [i8; 15] = [6, 1, 3, 7, 2, 4, 9, 8, 0, 5, 3, 5, 0, 9, 8];
+        let answer: [i8; 15] = [0, 0, 1, 2, 3, 3, 4, 5, 5, 6, 7, 8, 8, 9, 9];
+        let length = int_array.len() - 1;
+        quick_sort_3way(&mut int_array, 0, length);
+        assert_eq!(int_array, answer)
     }
 }
