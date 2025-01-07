@@ -57,18 +57,22 @@ An extension to abstract in-place merge sort, that sort fully un-sorted array. A
 To further extend this method, we can 1) use insertion sort for small sub-arrays, 2) skip sub-arrays that are already in order, and 3) Recursive trickery to eliminate the copy to the auxiliary (TODO: add more info when I truly understand).
 
 ## Bottom-Up Merge Sort
-Also a recursive algorithm similar to top-down approach. Rather than dividing the array over and over then merge sorting the sub-arrays, bottom-up approach merge sort sub-sections (usually smallest portion possible) of the array with multiple pass increasing the sub-section size (usually double the previous size, for in-place merge sort) until the whole array is sorted.
+Also a recursive algorithm similar to top-down approach. Rather than dividing the array over and over then merge sorting the sub-arrays, bottom-up approach merge sort sub-sections (usually smallest portion possible) of the array with multiple passes increasing the sub-section size (usually double the previous size, for in-place merge sort) until the whole array is sorted.
 
 Method of choice when sorting *linked-list* data structure, where one can sort the list *in-place* by creating pointer to node instead of having a seperate auxiliary array.
 
 > All sorting above are compare-based sorting algorithm.
 
 # Quicksort
+See follow.
 
 ## Basic
 A divide and conquer method. First partitioning an array to two subarrays, then sort each indepentently. In comparsion to merge sort, which require an additional sort of the final two sorted subarrays, quicksort rearrange the array such that when the two subarrays are sorted, the whole array are ordered.
 
 > Partitioning is the key to quicksort.
+
+## 3-Way Partitioning Partitioning Quick Sort
+An extension to basic quicksort, by tracking additional index that are equal to the value that we are tracking, in turns the left and right subarrays will be smaller given that there are large number of duplicate and increasing efficiency by lowering number of possible compares.
 
 # How to run the code
 
