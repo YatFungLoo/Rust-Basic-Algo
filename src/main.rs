@@ -1,3 +1,4 @@
+use ntest::timeout;
 use std::cmp;
 use std::cmp::Ordering;
 use std::env;
@@ -304,9 +305,41 @@ mod tests {
     }
 
     #[test]
+    #[timeout(100)]
+    fn quick_sort_test_long_array() {
+        let mut int_array: [i8; 40] = [
+            1, 6, 7, 3, 2, 4, 9, 8, 0, 5, 1, 6, 7, 3, 2, 4, 9, 8, 0, 5, 1, 6, 7, 3, 2, 4, 9, 8, 0,
+            5, 1, 6, 7, 3, 2, 4, 9, 8, 0, 5,
+        ];
+        let answer: [i8; 40] = [
+            0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7,
+            7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9,
+        ];
+        let length = int_array.len() - 1;
+        quick_sort(&mut int_array, 0, length);
+        assert_eq!(int_array, answer);
+    }
+
+    #[test]
     fn quick_sort_3way_test() {
         let mut int_array: [i8; 15] = [6, 1, 3, 7, 2, 4, 9, 8, 0, 5, 3, 5, 0, 9, 8];
         let answer: [i8; 15] = [0, 0, 1, 2, 3, 3, 4, 5, 5, 6, 7, 8, 8, 9, 9];
+        let length = int_array.len() - 1;
+        quick_sort_3way(&mut int_array, 0, length);
+        assert_eq!(int_array, answer)
+    }
+
+    #[test]
+    #[timeout(100)]
+    fn quick_sort_3way_test_long_array() {
+        let mut int_array: [i8; 40] = [
+            1, 6, 7, 3, 2, 4, 9, 8, 0, 5, 1, 6, 7, 3, 2, 4, 9, 8, 0, 5, 1, 6, 7, 3, 2, 4, 9, 8, 0,
+            5, 1, 6, 7, 3, 2, 4, 9, 8, 0, 5,
+        ];
+        let answer: [i8; 40] = [
+            0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7,
+            7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9,
+        ];
         let length = int_array.len() - 1;
         quick_sort_3way(&mut int_array, 0, length);
         assert_eq!(int_array, answer)
