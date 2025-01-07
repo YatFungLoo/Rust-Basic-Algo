@@ -158,7 +158,7 @@ pub fn quick_sort(array: &mut [i8], lo: usize, hi: usize) {
     }
     let j = quick_sort_partition(array, lo, hi);
     if j == 0 {
-        quick_sort(array, lo, j );
+        quick_sort(array, lo, j);
     } else {
         quick_sort(array, lo, j - 1);
     }
@@ -190,6 +190,35 @@ pub fn quick_sort_partition(array: &mut [i8], lo: usize, hi: usize) -> usize {
     }
     array.swap(lo, j);
     j
+}
+
+pub fn quick_sort_3way(array: &mut [i8], lo: usize, hi: usize) {
+    if hi <= lo {
+        return;
+    }
+    let mut lt = lo;
+    let mut i = lo + 1;
+    let mut gt = hi;
+    let c = array[lo]; // int to be 'c'ompared.
+
+    while i <= gt {
+        match array[i].cmp(&c) {
+            Ordering::Less => {
+                array.swap(lt, i);
+                lt += 1;
+                i += 1;
+            }
+            Ordering::Equal => {
+                i += 1;
+            }
+            Ordering::Greater => {
+                array.swap(i, gt);
+                gt -= 1;
+            }
+        }
+    }
+    quick_sort(array, lo, lt - 1);
+    quick_sort(array, gt + 1, hi);
 }
 
 fn main() {
