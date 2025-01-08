@@ -21,6 +21,9 @@ All implemented are referencing from Algorithms 4th Edition by Robert Sedgewick,
   - [Bottom-Up Merge Sort](#bottom-up-merge-sort)
 - [Quicksort](#quicksort)
   - [Basic](#basic)
+  - [3-Way Partitioning Partitioning Quick Sort](#3-way-partitioning-partitioning-quick-sort)
+- [Priority Queues](#priority-queues)
+  - [Binary Heap Implementation](#binary-heap-implementation)
 - [How to run the code](#how-to-run-the-code)
 
 <!-- markdown-toc end -->
@@ -74,9 +77,17 @@ A divide and conquer method. First partitioning an array to two subarrays, then 
 ## 3-Way Partitioning Partitioning Quick Sort
 An extension to basic quicksort, by tracking additional index that are equal to the value that we are tracking, in turns the left and right subarrays will be smaller given that there are large number of duplicate and increasing efficiency by lowering number of possible compares.
 
+# Priority Queues
+In comparesion to queues (removeing the oldest) and stacks (removing the newest), priority queue instead provides two major function 1) remove the maximum and 2) insert. Used when keys correspond to event times, to be processed in chronological order.
+
+## Binary Heap Based Priority Queues
+Items are kept in an array. Each key is guaranteed to be larger than or equal to the keys at two other specific positions, in turn, each of those keys must be larger than or equal to two additional keys.
+
+Binary heap guarantee a O(1) access to minimum or maximum, depending on the binary tree type.
+
 # How to run the code
 
-This project uses rustc 1.83.0 (90b35a623 2024-11-26) and was developed on Ubuntu 22.04. Make sure rustc is properly installed before continuing.
+This project uses rustc 1.83.0 (90b35a623 2024-11-26) and was developed on Ubuntu 22.04/ MacOS 15.2. Make sure rustc is properly installed before continuing.
 
 No main is written for the code so feel free to create your own array and test out each function. Run
 
