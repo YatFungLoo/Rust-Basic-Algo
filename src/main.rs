@@ -3,6 +3,8 @@ use std::cmp;
 use std::cmp::Ordering;
 use std::env;
 
+mod queue;
+
 pub fn print_array(array: &[i8]) {
     // for element in array {
     let length = array.len() - 1;
