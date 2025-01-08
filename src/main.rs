@@ -1,10 +1,11 @@
-use ntest::timeout;
 use std::cmp;
 use std::cmp::Ordering;
 use std::env;
 
+mod queue;
+
 pub fn print_array(array: &[i8]) {
-    // for element in array {
+    // for element in array
     let length = array.len() - 1;
     for (index, element) in array.iter().enumerate() {
         match index.cmp(&length) {
@@ -233,6 +234,7 @@ fn main() {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use ntest::timeout;
 
     #[test]
     fn selection_sort_test() {
