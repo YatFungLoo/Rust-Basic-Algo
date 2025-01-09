@@ -2,6 +2,7 @@ use std::cmp;
 use std::cmp::Ordering;
 use std::env;
 
+mod binary_heap;
 mod queue;
 
 pub fn print_array(array: &[i8]) {
