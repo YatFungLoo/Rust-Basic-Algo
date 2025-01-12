@@ -78,12 +78,29 @@ A divide and conquer method. First partitioning an array to two subarrays, then 
 An extension to basic quicksort, by tracking additional index that are equal to the value that we are tracking, in turns the left and right subarrays will be smaller given that there are large number of duplicate and increasing efficiency by lowering number of possible compares.
 
 # Priority Queues
-In comparesion to queues (removeing the oldest) and stacks (removing the newest), priority queue instead provides two major function 1) remove the maximum and 2) insert. Used when keys correspond to event times, to be processed in chronological order.
+In comparison to queues (removing the oldest) and stacks (removing the newest), priority queue instead provides two major function 1) remove the maximum and 2) insert. Used when keys correspond to event times, to be processed in chronological order.
 
 ## Binary Heap Based Priority Queues
 Items are kept in an array. Each key is guaranteed to be larger than or equal to the keys at two other specific positions, in turn, each of those keys must be larger than or equal to two additional keys.
 
 Binary heap guarantee a O(1) access to minimum or maximum, depending on the binary tree type.
+
+## Array Implementation
+The binary heap tree structure is represented using an array. Unlike a linked list, there are no pointer information stored at each node, instead node parents and child are accessed by fortunately simple arithmetics.
+
+Index goes up by each tree depth increase and from left to right. To calculate parent index, while it is not at root (index 0), it is done by `(index - 1) / 2`. To access left and right child index, it is done by `(2 * index) + 1` for left child node and `(2 * index) + 2` for right child node.
+
+## More on Heap
+If a node violate heap property, the tree will need to be reheapify. There are two main type of reheapifying methods, 1) Bottom-up (aka. swim) and 2) top-down (aka. sink).
+
+Bottom-up (swim) traverse the tree and check for any node that are larger than (in case of maximum heap) that node's parent's key, if true then exchange the node with its parent, and repeat the process until the node reaches a larger key, or "swim" to the root.
+
+Top-down (sink) also traverse the tree but instead checks if node's left or right child is smaller than (also in case of maximum heap), if true then exchange the node with its larger child, and repeat the process until the node is larger than its children, or it "sinks" to the bottom.
+
+## Heap-sort and Sort-down
+For any array, heapify it and sort-down the maximum or minimum value (depending on the type of tree) to produce a sorted array.
+
+It shines at very large data sets, while similar to selection sort, it does not require to process all data like selection sort and work on a subset. Using less compares.
 
 # How to run the code
 
