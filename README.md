@@ -23,7 +23,10 @@ All implemented are referencing from Algorithms 4th Edition by Robert Sedgewick,
   - [Basic](#basic)
   - [3-Way Partitioning Partitioning Quick Sort](#3-way-partitioning-partitioning-quick-sort)
 - [Priority Queues](#priority-queues)
-  - [Binary Heap Implementation](#binary-heap-implementation)
+  - [Binary Heap Based Priority Queues](#binary-heap-based-priority-queues)
+  - [Array Implementation](#array-implementation)
+  - [More on Heap](#more-on-heap)
+  - [Heap-sort and Sort-down](#heap-sort-and-sort-down)
 - [How to run the code](#how-to-run-the-code)
 
 <!-- markdown-toc end -->

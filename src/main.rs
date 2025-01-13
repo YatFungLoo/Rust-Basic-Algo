@@ -1,3 +1,6 @@
+#![allow(dead_code)]
+#![allow(unused_variables)]
+
 use std::cmp;
 use std::cmp::Ordering;
 use std::env;
