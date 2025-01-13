@@ -231,6 +231,22 @@ pub fn quick_sort_3way(array: &mut [i8], lo: usize, hi: usize) {
     quick_sort(array, gt + 1, hi);
 }
 
+pub fn binary_search(array: &[i8], lo: usize, hi: usize, key: i8) -> usize {
+    if hi < lo {
+        return lo;
+    }
+    let mid = lo + ((lo + hi) / 2);
+    match array[mid].cmp(&key) {
+        Ordering::Less => {
+            binary_search(array, mid + 1, hi, key)
+        }
+        Ordering::Equal => mid,
+        Ordering::Greater => {
+            binary_search(array, lo, mid, key)
+        }
+    }
+}
+
 fn main() {
     env::set_var("RUST_BACKTRACE", "1");
 }
