@@ -1,7 +1,7 @@
 # Rust-Basic-Algo
 Simple algorithms implemented with Rust, as self-learning.
 
-*Goal: a sorting a day until i finish chapter 2 of the book on sorting.*
+*Goal: a sorting a day until i finish chapter 2 of the book on sorting.* <- Done!
 
 All implemented are referencing from Algorithms 4th Edition by Robert Sedgewick, Kevin Wayne.
 
@@ -12,6 +12,7 @@ All implemented are referencing from Algorithms 4th Edition by Robert Sedgewick,
 
 - [Rust-Basic-Algo](#rust-basic-algo)
 - [Elementary Sorts](#elementary-sorts)
+  - [Bubble Sort ($O(n^2)$)](#bubble-sort-on2)
   - [Selection Sort](#selection-sort)
   - [Insertion Sort](#insertion-sort)
   - [Shell Sort](#shell-sort)
@@ -33,6 +34,9 @@ All implemented are referencing from Algorithms 4th Edition by Robert Sedgewick,
 
 # Elementary Sorts
 Doesn't require extra space, only ever swapping in-place. Good for partially sorted array, the more partially sorted an array is the better.
+
+## Bubble Sort ($O(n^2)$)
+Simplest sorting algorithm, compare neighbour element one by one form start to end index, repeat process for array length of times or until there is no swap while compare neighbour elements as a slight optimisation.
 
 ## Selection Sort
 Find smallest item in the array and exchange it to the first entry. Repeat to the next smallest item and exchange with the second entry (since it will be the second smallest). Repeat until the whole array is sorted.
